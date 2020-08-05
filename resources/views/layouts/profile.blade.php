@@ -31,6 +31,30 @@ aria-label="Toggle navigation">
                         </ul>
                         <ul class="navbar-nav mr-auto">
                         </ul>
+                        <ul class="navbar-nav ml-auto">
+                        {{ログインんしていなかったら、ログイン画へのリンク表示}}
+                        @guest
+                           <li><a class="nav-link" href="{{route('login')}}"{{__('login')}}></li></a>
+                        {{ログインしていたら、ユーザー名とログアウトボタンを表示}}
+                        ＠else
+                           <li class="nav-item dropdown">
+                               <a id="navbarDropdown" class="nav-link dropdown-toggle"href='#' role="botton" data-toggle="dropdown" aria-haspopup="true" 
+                               aria-expanded="false" v-pre>
+                                   {{Auth::user()->name}} <span class="caret"></span>
+                               </a>
+                                
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href"{{ route('logout')}}"onclick="evnt.preventDefalt();document.getElemntById('logout-frrom')
+                                    .submit();">
+                                　　{{"__('logout')"}}
+                                    </a>
+                                    <form id="logout-form" action="{{route('logout')}}"method="POST" style="display: none;">
+                                        @csrf
+                                    </from>
+                                </div>
+                            </li>
+                            @endguest
+                          </ul>    
                     </div>
                 </div> 
             </nav>
