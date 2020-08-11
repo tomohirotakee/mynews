@@ -44,7 +44,40 @@ class ProfileController extends Controller
       // データベースに保存する
       $news->fill($form);
       $news->save();
-      return redirect('admin/news/create');
+      return redirect('admin/profile/create');
     }
 }
+    public function index(Request $request)
+    {
+        $cond_title = $request->cond_title;
+        if ($cond_title !='') {
+            $posts = Profile::Where('title', $cond_title)->get();
+        }else{
+           $posts = Prifile::all();    
+        }
+        return view('admin.profile.index',['posts' => $posts, 'cond_title' => $cond_title]);
+        }
+    
+    public function cereate(Request $request)
+    {
+        $news = Profile::find($request->id);
+        if (empty($news)) {
+          abort(404);     
+        }
+        return view('admin.profile.edit',['profile_form' => $news]);
+    }
+    
+     public function update(Request $request)
+    {
+       
+        $this->validate($request, profile::$rules);
+        $this = profile::find($request->id);
+        $news_form = $request->all();
+       
+        unset($news_form['_token']);
+       
+        $news->fill($news_form)->save();
+       
+        return redirect('admin/profile');
+        }
 }
