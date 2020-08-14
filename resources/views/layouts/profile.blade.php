@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title')</title>
+    <title>@yield('myプロフィール')</title>
         <script src="{{secure_asset('js/app.js')}}" defer></script>
         <link rel="dns-prefetch" href="http://fonts.gstatic.com">
         <link href="http://fonts.googleapis.cpm/css?family=Raleway:300,400,600"
@@ -60,7 +60,7 @@ aria-label="Toggle navigation">
             </nav>
             
             <main class="py-4">
-                @yield('content')
+                @yield('自己紹介')
             </main>
         </div>
     </body>
